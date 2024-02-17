@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Add a Movie";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Add a Movie to the Collection</h2>
+    <form>
+        <label for="category">Category: </label>
+        <select id="category" required>
+            <option value="action">Action/Adventure</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="family">Family</option>
+            <option value="horror">Horror/Suspense</option>
+            <option value="television">Television</option>
+            <option value="miscellaneous">Miscellaneous</option>
+        </select>
+        <label for="title">Title: </label>
+        <input id="title" type="text" required />
+        <label for="year">Year: </label>
+        <input id="year" type="text" required />
+        <label for="director">Director: </label>
+        <input id="director" type="text" required />
+        <label for="rating">Rating: </label>
+        <select id="rating" required>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+        <label>Edited: </label>
+        <select id="edited">
+            <option value="Y">Yes</option>
+            <option value="">No</option>
+        </select>
+        <label>Lent To: </label>
+        <input value="" type="text"/>
+        <label>Notes: </label>
+        <input type="text" maxlength="25"/>
+    </form>
+</div>
