@@ -3,7 +3,11 @@
     public class Application
     {
         public int ApplicationID { get; set; }
-        public string Category { get; set; }
+        public string Category {
+            get { return Category; }
+            set { Category = value?.ToUpper(); }
+        }
+
         public string Title { get; set; }
         public int Year { get; set; }
         public string Director { get; set; }
