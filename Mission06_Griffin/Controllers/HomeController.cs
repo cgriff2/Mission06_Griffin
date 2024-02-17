@@ -22,9 +22,17 @@ namespace Mission06_Griffin.Controllers
         {
             return View();
         }
+
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Application response)
+        {
+            return View("Confirmation", response);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
