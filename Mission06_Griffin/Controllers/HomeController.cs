@@ -6,11 +6,10 @@ namespace Mission06_Griffin.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private MovieApplicationsContext _context;
+        public HomeController(MovieApplicationsContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -32,6 +31,9 @@ namespace Mission06_Griffin.Controllers
         [HttpPost]
         public IActionResult Add(Application response)
         {
+            _context.Applications.Add(response);
+            _context.SaveChanges();
+
             return View("Confirmation", response);
         }
 
