@@ -4,8 +4,8 @@
     {
         public int ApplicationID { get; set; }
         public string Category {
-            get { return Category; }
-            set { Category = value?.ToUpper(); }
+            get;
+            set;
         }
 
         public string Title { get; set; }

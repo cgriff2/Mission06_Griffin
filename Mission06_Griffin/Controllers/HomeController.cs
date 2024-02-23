@@ -25,7 +25,7 @@ namespace Mission06_Griffin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View("Add", new Application());
         }
 
         [HttpPost]
