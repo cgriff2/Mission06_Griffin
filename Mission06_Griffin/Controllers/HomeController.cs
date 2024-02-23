@@ -6,8 +6,8 @@ namespace Mission06_Griffin.Controllers
 {
     public class HomeController : Controller
     {
-        private MovieApplicationsContext _context;
-        public HomeController(MovieApplicationsContext context)
+        private JoelHiltonMovieCollectionContext _context;
+        public HomeController(JoelHiltonMovieCollectionContext context)
         {
             _context = context;
         }
@@ -25,17 +25,82 @@ namespace Mission06_Griffin.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View("Add", new Application());
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+
+            return View("Add", new Movie());
         }
 
         [HttpPost]
-        public IActionResult Add(Application response)
+        public IActionResult Add(Movie response)
         {
-            _context.Applications.Add(response);
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response); // Add a record to the database
+                _context.SaveChanges();
+
+                return View("Confirmation", response);
+            }
+            else
+            {
+                ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+
+                return View("Add", new Movie());
+            }
+        }
+
+        public IActionResult MovieList()
+        {
+            // First Linq query
+            var movies = _context.Movies
+                .OrderBy(x => x.Title).ToList();
+
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var record = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+            .OrderBy(x => x.CategoryName).ToList();
+
+            return View("Add", record);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Movie updatedInfo)
+        {
+            _context.Update(updatedInfo);
             _context.SaveChanges();
 
-            return View("Confirmation", response);
+            return RedirectToAction("MovieList");
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+            .OrderBy(x => x.CategoryName).ToList();
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movie movie)
+        {
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

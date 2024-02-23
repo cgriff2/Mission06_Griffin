@@ -52,7 +52,7 @@ namespace Mission06_Griffin.Migrations
 
                     b.HasKey("ApplicationID");
 
-                    b.ToTable("Applications");
+                    b.ToTable("Applications", (string)null);
                 });
 #pragma warning restore 612, 618
         }

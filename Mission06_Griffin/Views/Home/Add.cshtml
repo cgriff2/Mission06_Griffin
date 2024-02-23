@@ -2,32 +2,32 @@
     ViewData["Title"] = "Add a Movie";
 }
 
-@model Application
+@model Movie
 
 <div class="text-center">
     <h2 class="display-4">Add a Movie to the Collection</h2>
     <form method="post">
-        <label asp-for="Category">Category: </label>
-        <select asp-for="Category" required>
-            <option value="action">Action/Adventure</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="family">Family</option>
-            <option value="horror">Horror/Suspense</option>
-            <option value="television">Television</option>
-            <option value="miscellaneous">Miscellaneous</option>
+        <input asp-for="MovieId" hidden />
+        <br />
+        <label asp-for="CategoryId">Category: </label>
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
         </select>
         <br />
         <label asp-for="Title">Title: </label>
-        <input asp-for="Title" type="text" required />
+        <input asp-for="Title" type="text" />
         <br />
 
         <label asp-for="Year">Year: </label>
-        <input asp-for="Year" type="number" required min="1000" max="9999" pattern="\d{4}" />
+        <input asp-for="Year" type="number" />
         <br />
 
         <label asp-for="Director">Director: </label>
-        <input asp-for="Director" type="text" required />
+        <input asp-for="Director" type="text" />
         <br />
 
         <label asp-for="Rating">Rating: </label>
@@ -41,13 +41,20 @@
 
         <label asp-for="Edited">Edited: </label>
         <select asp-for="Edited">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
         </select>
         <br />
 
         <label asp-for="LentTo">Lent To: </label>
         <input asp-for="LentTo" value="" type="text" />
+        <br />
+
+        <label asp-for="CopiedToPlex">Copied to Plex? </label>
+        <select asp-for="CopiedToPlex">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
         <br />
 
         <label asp-for="Notes">Notes: </label>
