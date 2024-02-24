@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Mission06_Griffin.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mission06_Griffin.Controllers
 {
@@ -46,7 +47,7 @@ namespace Mission06_Griffin.Controllers
                 ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.CategoryName).ToList();
 
-                return View("Add", new Movie());
+                return View(response);
             }
         }
 
@@ -99,13 +100,6 @@ namespace Mission06_Griffin.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("MovieList");
-        }
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
